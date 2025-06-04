@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdmn25a6icjej"]
+
+[ext_resource type="Script" path="res://scripts/chaser.gd" id="1_1v0tl"]
+[ext_resource type="SpriteFrames" uid="uid://drcw0fy0r5yg1" path="res://animations/chaser.tres" id="3_wjrlc"]
+[ext_resource type="Texture2D" uid="uid://b6mkeb7run7ws" path="res://sprites/flashlight_texture.png" id="4_iwec0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4a2e"]
+radius = 14.0
+height = 46.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0nkti"]
+radius = 83.0963
+
+[node name="StaticBody2D" type="StaticBody2D"]
+script = ExtResource("1_1v0tl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 12)
+shape = SubResource("CapsuleShape2D_y4a2e")
+
+[node name="Interaction" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+shape = SubResource("CircleShape2D_0nkti")
+
+[node name="Flashlight" type="RayCast2D" parent="."]
+target_position = Vector2(200, 0)
+
+[node name="PointLight2D" type="PointLight2D" parent="Flashlight"]
+position = Vector2(6, 0)
+scale = Vector2(6, 2)
+energy = 3.36
+range_layer_min = -10
+range_layer_max = 10
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.752941)
+texture = ExtResource("4_iwec0")
+offset = Vector2(16, 0)
+
+[node name="CharSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_wjrlc")
+animation = &"spooked"

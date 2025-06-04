@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://dhmflhqqfmp7q"]
+
+[ext_resource type="Script" path="res://scripts/possessable.gd" id="1_gaeoc"]
+[ext_resource type="Texture2D" uid="uid://do6qgk4ybabcl" path="res://sprites/armor.png" id="1_vh5eu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xhoj2"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vppfa"]
+resource_local_to_scene = true
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xc8lw"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -100.0
+radial_accel_max = 100.0
+scale_min = 0.3
+scale_max = 0.3
+anim_speed_min = 5.9
+anim_speed_max = 5.9
+
+[sub_resource type="Gradient" id="Gradient_3bpsy"]
+offsets = PackedFloat32Array(0, 0.532468, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.935065, 0.935065, 0.935065, 0.0649351, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fir5j"]
+gradient = SubResource("Gradient_3bpsy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xdl6m"]
+radius = 16.0
+height = 64.0
+
+[node name="Possessable" type="StaticBody2D"]
+script = ExtResource("1_gaeoc")
+
+[node name="Interaction" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_xhoj2")
+one_way_collision_margin = 0.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Interaction"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_vppfa")
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_xc8lw")
+texture = SubResource("GradientTexture2D_fir5j")
+visibility_rect = Rect2(-64, -64, 128, 128)
+local_coords = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_xdl6m")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_vh5eu")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
