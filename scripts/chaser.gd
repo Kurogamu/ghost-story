@@ -69,8 +69,14 @@ func _set_state(next_state: States) -> void:
 	match next_state:
 		States.DEFAULT: $CharSprite.play("default")
 		States.SCARED: $CharSprite.play("scared")
-		States.SPOOKED: $CharSprite.play("spooked")
-		States.FLEEING: $CharSprite.play("fleeing")
+		States.SPOOKED:
+			$SoundWave.run()
+			$CharSprite.play("spooked")
+			$ReactionSprite.visible = true
+			$ReactionSprite.play("spooked")
+		States.FLEEING:
+			$SoundWave.run()
+			$CharSprite.play("fleeing")
 	state = next_state
 
 
@@ -79,8 +85,9 @@ func is_interactable():
 
 
 func scare():
-	scare_level += 1
-	_set_state(States.SPOOKED)
+	if state in [States.DEFAULT, States.SCARED]:
+		scare_level += 1
+		_set_state(States.SPOOKED)
 
 
 func flee():
@@ -88,6 +95,7 @@ func flee():
 
 
 func _on_end_animation():
+	$ReactionSprite.visible = false
 	match state:
 		States.SPOOKED:
 			if scare_level >= scare_threshold:

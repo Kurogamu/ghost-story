@@ -13,12 +13,14 @@ func _ready() -> void:
 	for node in self.get_tree().get_nodes_in_group("Possessable"):
 		node.possessable_enter.connect(_on_possessable)
 		node.possessable_exit.connect(_on_interactable_exit)
-		node.emit_noise.connect(_on_emit_noise)
+		node.get_node("SoundWave").heard.connect(_on_heard)
 
 	for node in self.get_tree().get_nodes_in_group("Chaser"):
 		node.chaser_enter.connect(_on_chaser_enter)
 		node.chaser_exit.connect(_on_interactable_exit)
 		node.light_enter.connect(_on_chaser_light_enter)
+		node.get_node("SoundWave").heard.connect(_on_heard)
+
 
 		%Camera/AnimationPlayer.play("camera_zoom_out")
 
@@ -48,10 +50,9 @@ func _on_interactable_exit(node):
 		interaction_target = null
 
 
-func _on_emit_noise():
-	for node in self.get_tree().get_nodes_in_group("Chaser"):
+func _on_heard(node: Node2D):
+	if "Chaser" in node.get_groups():
 		node.scare()
-
 
 func _input(event):
 	if event.is_action_pressed("interact"):

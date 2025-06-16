@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhmflhqqfmp7q"]
+[gd_scene load_steps=10 format=3 uid="uid://dhmflhqqfmp7q"]
 
 [ext_resource type="Script" path="res://scripts/possessable.gd" id="1_gaeoc"]
 [ext_resource type="Texture2D" uid="uid://do6qgk4ybabcl" path="res://sprites/armor.png" id="1_vh5eu"]
+[ext_resource type="PackedScene" uid="uid://b5cio6f6rn8oe" path="res://scenes/sound_wave.tscn" id="2_t4fng"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xhoj2"]
 
@@ -44,6 +45,8 @@ height = 64.0
 
 [node name="Possessable" type="StaticBody2D"]
 script = ExtResource("1_gaeoc")
+
+[node name="SoundWave" parent="." instance=ExtResource("2_t4fng")]
 
 [node name="Interaction" type="Area2D" parent="."]
 

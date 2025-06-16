@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://bw7yupyo8ie8d"]
+[gd_scene load_steps=25 format=3 uid="uid://bw7yupyo8ie8d"]
 
 [ext_resource type="Script" path="res://scripts/ghost_character.gd" id="1_jqp6d"]
 [ext_resource type="Texture2D" uid="uid://vlq5k6388260" path="res://sprites/ghost.png" id="2_013n5"]
 [ext_resource type="Texture2D" uid="uid://cssk4abjsmefc" path="res://sprites/ghost-v2.png" id="3_xc8am"]
+[ext_resource type="SpriteFrames" uid="uid://b1wn2dmi0dki7" path="res://sprites/reactions.tres" id="4_3fdp2"]
 
 [sub_resource type="Gradient" id="Gradient_ogkr7"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -164,3 +165,9 @@ animation = &"spooking"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 11)
 shape = SubResource("CircleShape2D_hq16e")
+
+[node name="ReactionSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(30, -20)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("4_3fdp2")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdmn25a6icjej"]
+[gd_scene load_steps=8 format=3 uid="uid://bdmn25a6icjej"]
 
 [ext_resource type="Script" path="res://scripts/chaser.gd" id="1_1v0tl"]
 [ext_resource type="SpriteFrames" uid="uid://drcw0fy0r5yg1" path="res://animations/chaser.tres" id="3_wjrlc"]
+[ext_resource type="PackedScene" uid="uid://b5cio6f6rn8oe" path="res://scenes/sound_wave.tscn" id="4_6l44h"]
 [ext_resource type="Texture2D" uid="uid://b6mkeb7run7ws" path="res://sprites/flashlight_texture.png" id="4_iwec0"]
+[ext_resource type="SpriteFrames" uid="uid://b1wn2dmi0dki7" path="res://sprites/reactions.tres" id="5_o588a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4a2e"]
 radius = 14.0
@@ -40,3 +42,10 @@ offset = Vector2(16, 0)
 [node name="CharSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_wjrlc")
 animation = &"spooked"
+
+[node name="SoundWave" parent="." instance=ExtResource("4_6l44h")]
+
+[node name="ReactionSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(27, -36)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("5_o588a")

@@ -3,8 +3,6 @@ extends StaticBody2D
 signal possessable_enter
 signal possessable_exit
 
-signal emit_noise
-
 enum States {DEFAULT, POSSESS_READY, POSSESSED, BROKEN}
 var state: States = States.DEFAULT
 
@@ -42,7 +40,7 @@ func _set_state(next_state: States) -> void:
 			$Interaction/GPUParticles2D.set_emitting(false)
 			$CollisionShape2D.set_disabled(true)
 			$Sprite.set_region_rect(Rect2(64, 0, 64, 64)) # TODO: figure out spritemap
-			emit_noise.emit()
+			$SoundWave.run()
 		States.POSSESSED:
 			$Interaction/GPUParticles2D.set_emitting(false)
 			$Sprite.set_region_rect(Rect2(128, 0, 64, 64)) # TODO: figure out spritemap
