@@ -6,19 +6,20 @@ extends CharacterBody2D
 @export var start_pos: Vector2 = Vector2(0, 0)
 const IS_MAIN = true
 
-enum States {IDLE, MOVING, POSSESSING, SCARED, SPOOKING}
+enum States {IDLE, INVISIBLE, MOVING, POSSESSING, SCARED, SPOOKING}
 var state: States = States.IDLE
 var last_velocity = Vector2(0,0)
 
 func _ready():
 	$CharSprite.play("idle")
 	$CharSprite.animation_finished.connect(_on_end_animation)
+	$InvisibilityTimeout.connect("timeout", _on_invisibility_end)
 	start_pos = self.position
 
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
-	if state in [States.IDLE, States.MOVING]:
+	if state in [States.IDLE, States.MOVING, States.INVISIBLE]:
 		var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 		var some_x = abs(direction.x) > 0.1
@@ -48,13 +49,36 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 
+
+func _set_state(next_state: States) -> void:
+	match next_state:
+		States.POSSESSING:
+			$CharSprite.visible = false
+		States.IDLE:
+			$CharSprite.play("idle")
+			$CharSprite.visible = true
+		States.SCARED:
+			$CharSprite.play("scared")
+			$ReactionSprite.visible = true
+			$ReactionSprite.play("spooked")
+		States.SPOOKING:
+			$CharSprite.play("spooking")
+			$ReactionSprite.visible = true
+			$ReactionSprite.play("boo")
+		States.INVISIBLE:
+			$CharSprite.visible = true # Ironic right?
+			$CharSprite.play("idle")
+			self.set_modulate(Color(1.0, 1.0, 1.0, 0.2))
+			$InvisibilityTimeout.start()
+
+	state = next_state
+
+
 func set_possessing(do_possess: bool) -> void:
 	if do_possess:
-		state = States.POSSESSING
-		$CharSprite.visible = false
+		_set_state(States.POSSESSING)
 	else:
-		state = States.IDLE
-		$CharSprite.visible = true
+		_set_state(States.INVISIBLE)
 
 
 func get_possessing() -> bool:
@@ -62,32 +86,28 @@ func get_possessing() -> bool:
 
 
 func scare() -> void:
-	if state != States.SCARED:
-		state = States.SCARED
-		$CharSprite.play("scared")
-		$ReactionSprite.visible = true
-		$ReactionSprite.play("spooked")
+	if state not in [States.SCARED, States.INVISIBLE]:
+		_set_state(States.SCARED)
 
 
 func spook() -> void:
 	if state in [States.IDLE, States.MOVING]:
-		state = States.SPOOKING
-		$CharSprite.play("spooking")
-		$ReactionSprite.visible = true
-		$ReactionSprite.play("boo")
+		_set_state(States.SPOOKING)
 
 
 func get_hidden() -> bool:
-	return state in [States.SCARED, States.POSSESSING]
+	return state in [States.SCARED, States.POSSESSING, States.INVISIBLE]
 
 
 func _on_end_animation():
-	$ReactionSprite.visible = false
 	match state:
 		States.SCARED:
-			self.position = start_pos
-			state = States.IDLE
-			$CharSprite.play("idle")
+			$ReactionSprite.visible = false
+			_set_state(States.INVISIBLE)
 		States.SPOOKING:
-			state = States.IDLE
-			$CharSprite.play("idle")
+			_set_state(States.IDLE)
+
+
+func _on_invisibility_end():
+	self.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
+	_set_state(States.IDLE)

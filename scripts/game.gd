@@ -21,7 +21,6 @@ func _ready() -> void:
 		node.light_enter.connect(_on_chaser_light_enter)
 		node.get_node("SoundWave").heard.connect(_on_heard)
 
-
 		%Camera/AnimationPlayer.play("camera_zoom_out")
 
 
