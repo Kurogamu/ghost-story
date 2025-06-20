@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2scwb5eqenc7"]
+
+[ext_resource type="AudioStream" uid="uid://bltse3kn3rml0" path="res://audio/melody.ogg" id="1_4x56d"]
+[ext_resource type="Script" path="res://scripts/music.gd" id="1_noeql"]
+[ext_resource type="AudioStream" uid="uid://b6kyvbwxjibsu" path="res://audio/chords.ogg" id="2_q7ats"]
+[ext_resource type="AudioStream" uid="uid://dq24xem5x1bvy" path="res://audio/bass.ogg" id="3_e2ok2"]
+[ext_resource type="AudioStream" uid="uid://ce7smsmvv6cjs" path="res://audio/drums.ogg" id="4_gwa6c"]
+
+[node name="Music" type="Node"]
+script = ExtResource("1_noeql")
+
+[node name="Melody" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_4x56d")
+volume_db = -25.0
+autoplay = true
+bus = &"melody"
+
+[node name="Chord" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_q7ats")
+autoplay = true
+bus = &"chords"
+
+[node name="Bass" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_e2ok2")
+volume_db = -25.0
+autoplay = true
+bus = &"bass"
+
+[node name="Drums" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gwa6c")
+volume_db = -25.0
+autoplay = true
+bus = &"drums"

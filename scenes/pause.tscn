@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl0sfhg1bpt8q"]
+
+[ext_resource type="Script" path="res://scenes/pausemenu.gd" id="1_fnm58"]
+
+[sub_resource type="SystemFont" id="SystemFont_ats31"]
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_jrbxd"]
+font = SubResource("SystemFont_ats31")
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_fnm58")
+
+[node name="PauseControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PauseControl"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 1320.0
+offset_bottom = 760.0
+color = Color(0.162, 0.162, 0.162, 0.594)
+
+[node name="Label" type="Label" parent="PauseControl"]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 192.0
+offset_right = 704.0
+offset_bottom = 215.0
+text = "paused"
+label_settings = SubResource("LabelSettings_jrbxd")
+horizontal_alignment = 1
+
+[node name="ResumeBtn" type="Button" parent="PauseControl"]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 312.0
+offset_right = 704.0
+offset_bottom = 343.0
+text = "resume"

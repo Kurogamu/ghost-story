@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 @export var max_speed: float = 200.0
-@export var acceleration: float = 1000.0
-@export var deceleration: float = 800.0
+@export var acceleration: float = 1500.0
+@export var deceleration: float = 1000.0
 @export var start_pos: Vector2 = Vector2(0, 0)
 const IS_MAIN = true
 
