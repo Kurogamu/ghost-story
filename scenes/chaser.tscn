@@ -6,9 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b6mkeb7run7ws" path="res://sprites/flashlight_texture.png" id="4_iwec0"]
 [ext_resource type="SpriteFrames" uid="uid://b1wn2dmi0dki7" path="res://sprites/reactions.tres" id="5_o588a"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y4a2e"]
-radius = 14.0
-height = 46.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_68mri"]
+radius = 11.65
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0nkti"]
 radius = 83.0963
@@ -17,8 +16,8 @@ radius = 83.0963
 script = ExtResource("1_1v0tl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 12)
-shape = SubResource("CapsuleShape2D_y4a2e")
+position = Vector2(0, 24)
+shape = SubResource("CircleShape2D_68mri")
 
 [node name="Interaction" type="Area2D" parent="."]
 

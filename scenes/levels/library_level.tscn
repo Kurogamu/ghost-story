@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://gdbqqma0dbf3"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_fk7g4"]
+[ext_resource type="PackedScene" uid="uid://dvol352c2xf32" path="res://scenes/floor_tile_map.tscn" id="2_noner"]
+[ext_resource type="PackedScene" uid="uid://dv887amsfkn00" path="res://scenes/objects_tile_map.tscn" id="3_o2b0v"]
+
+[node name="LibraryLevel" type="Node2D"]
+script = ExtResource("1_fk7g4")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-456, -360, 1272, -360, 1272, 832, -464, 832)
+
+[node name="FloorTileMap" parent="." instance=ExtResource("2_noner")]
+
+[node name="ObjectsTileMap" parent="." instance=ExtResource("3_o2b0v")]

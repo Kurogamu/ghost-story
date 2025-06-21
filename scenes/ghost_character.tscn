@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bw7yupyo8ie8d"]
+[gd_scene load_steps=29 format=3 uid="uid://bw7yupyo8ie8d"]
 
 [ext_resource type="Script" path="res://scripts/ghost_character.gd" id="1_jqp6d"]
 [ext_resource type="Texture2D" uid="uid://vlq5k6388260" path="res://sprites/ghost.png" id="2_013n5"]
@@ -145,7 +145,59 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hq16e"]
-radius = 11.0454
+radius = 8.544
+
+[sub_resource type="Animation" id="Animation_8d25v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_q1jb2"]
+resource_name = "camera_zoom"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_hpe1v"]
+resource_name = "camera_zoom_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(2, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6c7jf"]
+_data = {
+"RESET": SubResource("Animation_8d25v"),
+"camera_zoom_in": SubResource("Animation_q1jb2"),
+"camera_zoom_out": SubResource("Animation_hpe1v")
+}
 
 [node name="PlayerGhost" type="CharacterBody2D"]
 script = ExtResource("1_jqp6d")
@@ -163,7 +215,7 @@ sprite_frames = SubResource("SpriteFrames_jwau7")
 animation = &"spooking"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 11)
+position = Vector2(0, 16)
 shape = SubResource("CircleShape2D_hq16e")
 
 [node name="ReactionSprite" type="AnimatedSprite2D" parent="."]
@@ -174,3 +226,18 @@ sprite_frames = ExtResource("4_3fdp2")
 [node name="InvisibilityTimeout" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(72, 0)
+zoom = Vector2(2, 2)
+limit_left = -200
+limit_top = -100
+limit_right = 750
+limit_bottom = 500
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera"]
+libraries = {
+"": SubResource("AnimationLibrary_6c7jf")
+}

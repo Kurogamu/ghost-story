@@ -1,195 +1,12 @@
-[gd_scene load_steps=29 format=4 uid="uid://p7ksqskkxnjd"]
+[gd_scene load_steps=10 format=3 uid="uid://p7ksqskkxnjd"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_bdi2s"]
-[ext_resource type="Texture2D" uid="uid://bu63a1011q7es" path="res://sprites/floor.png" id="2_2nyhg"]
-[ext_resource type="Texture2D" uid="uid://cno7pet1j0lc8" path="res://sprites/bookshelf.png" id="3_sgt1o"]
-[ext_resource type="Texture2D" uid="uid://bayni66d7buh2" path="res://sprites/walls.png" id="4_n4hd4"]
+[ext_resource type="PackedScene" uid="uid://dvol352c2xf32" path="res://scenes/floor_tile_map.tscn" id="2_muwnv"]
+[ext_resource type="PackedScene" uid="uid://dv887amsfkn00" path="res://scenes/objects_tile_map.tscn" id="3_2uxfd"]
 [ext_resource type="PackedScene" uid="uid://bw7yupyo8ie8d" path="res://scenes/ghost_character.tscn" id="5_r6wb6"]
 [ext_resource type="PackedScene" uid="uid://dhmflhqqfmp7q" path="res://scenes/possessable.tscn" id="6_e81wv"]
 [ext_resource type="PackedScene" uid="uid://bdmn25a6icjej" path="res://scenes/chaser.tscn" id="7_23jwy"]
 [ext_resource type="PackedScene" uid="uid://c2scwb5eqenc7" path="res://scenes/music.tscn" id="8_6nl47"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xyfxe"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8nltn"]
-texture = ExtResource("2_2nyhg")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-0:0/0/terrain_set = 0
-0:0/0/terrain = 1
-0:0/0/terrains_peering_bit/right_side = 1
-0:0/0/terrains_peering_bit/bottom_side = 1
-0:0/0/terrains_peering_bit/left_side = 1
-0:0/0/terrains_peering_bit/top_side = 1
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fflt4"]
-resource_name = "bookshelf"
-texture = ExtResource("3_sgt1o")
-texture_region_size = Vector2i(32, 32)
-0:0/size_in_atlas = Vector2i(2, 2)
-0:0/0 = 0
-2:0/size_in_atlas = Vector2i(2, 2)
-2:0/0 = 0
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kmj5e"]
-polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xfh83"]
-polygon = PackedVector2Array(32, -20.25, -32, -20, -32, -32, 32, -32)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dtlqr"]
-polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ay07r"]
-polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ugecp"]
-polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vx7mq"]
-texture = ExtResource("4_n4hd4")
-texture_region_size = Vector2i(64, 64)
-2:0/0 = 0
-2:0/0/terrain_set = 0
-2:0/0/terrain = 2
-2:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_xfh83")
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-2:0/0/terrains_peering_bit/right_side = 2
-2:0/0/terrains_peering_bit/bottom_side = 1
-2:0/0/terrains_peering_bit/left_side = 2
-2:0/0/terrains_peering_bit/top_side = 0
-3:0/0 = 0
-3:0/0/terrain_set = 0
-3:0/0/terrain = 0
-3:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_dtlqr")
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-3:0/0/terrains_peering_bit/right_side = 0
-3:0/0/terrains_peering_bit/bottom_side = 0
-3:0/0/terrains_peering_bit/left_side = 0
-3:0/0/terrains_peering_bit/top_side = 1
-4:0/0 = 0
-4:0/0/terrain_set = 0
-4:0/0/terrain = 0
-4:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_ay07r")
-4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-4:0/0/terrains_peering_bit/right_side = 0
-4:0/0/terrains_peering_bit/bottom_side = 0
-4:0/0/terrains_peering_bit/left_side = 1
-4:0/0/terrains_peering_bit/top_side = 0
-5:0/0 = 0
-5:0/0/terrain_set = 0
-5:0/0/terrain = 0
-5:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_ugecp")
-5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-5:0/0/terrains_peering_bit/right_side = 1
-5:0/0/terrains_peering_bit/bottom_side = 0
-5:0/0/terrains_peering_bit/left_side = 0
-5:0/0/terrains_peering_bit/top_side = 0
-1:0/0 = 0
-1:0/0/terrain_set = 0
-1:0/0/terrain = 0
-1:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_kmj5e")
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-1:0/0/terrains_peering_bit/right_side = 0
-1:0/0/terrains_peering_bit/bottom_side = 0
-1:0/0/terrains_peering_bit/left_side = 0
-1:0/0/terrains_peering_bit/top_side = 0
-
-[sub_resource type="TileSet" id="TileSet_en2f5"]
-tile_size = Vector2i(64, 64)
-occlusion_layer_0/light_mask = 3
-physics_layer_0/collision_layer = 1
-physics_layer_0/physics_material = SubResource("PhysicsMaterial_xyfxe")
-terrain_set_0/mode = 2
-terrain_set_0/terrain_0/name = "void"
-terrain_set_0/terrain_0/color = Color(0.202708, 0.579905, 0.522651, 1)
-terrain_set_0/terrain_1/name = "floors"
-terrain_set_0/terrain_1/color = Color(0.948886, 0.212462, 0.628157, 1)
-terrain_set_0/terrain_2/name = "walls"
-terrain_set_0/terrain_2/color = Color(0.767243, 0.30561, 0.242452, 1)
-sources/0 = SubResource("TileSetAtlasSource_8nltn")
-sources/1 = SubResource("TileSetAtlasSource_fflt4")
-sources/2 = SubResource("TileSetAtlasSource_vx7mq")
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_k6tgr"]
-polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vhvaw"]
-polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cc436"]
-texture = ExtResource("3_sgt1o")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_k6tgr")
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -16.5, 32, -16.5, 32, 32, -32, 32)
-1:0/0 = 0
-1:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_vhvaw")
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -16.5, 32, -16.5, 32, 32, -32, 32)
-
-[sub_resource type="TileSet" id="TileSet_5f8mo"]
-tile_size = Vector2i(64, 64)
-occlusion_layer_0/light_mask = 1
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_cc436")
-
-[sub_resource type="Animation" id="Animation_8d25v"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, 2)]
-}
-
-[sub_resource type="Animation" id="Animation_q1jb2"]
-resource_name = "camera_zoom"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:zoom")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.533333),
-"transitions": PackedFloat32Array(0.5, 1),
-"update": 0,
-"values": [Vector2(2, 2), Vector2(3, 3)]
-}
-
-[sub_resource type="Animation" id="Animation_hpe1v"]
-resource_name = "camera_zoom_out"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:zoom")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.5, 1),
-"update": 0,
-"values": [Vector2(3, 3), Vector2(2, 2)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6c7jf"]
-_data = {
-"RESET": SubResource("Animation_8d25v"),
-"camera_zoom_in": SubResource("Animation_q1jb2"),
-"camera_zoom_out": SubResource("Animation_hpe1v")
-}
-
-[sub_resource type="Curve2D" id="Curve2D_kn8rg"]
-_data = {
-"points": PackedVector2Array(0, 2.11893, 0, -2.11893, -192, 80, 0, 0, 0, 0, -192, 192, 0, 0, 0, 0, -192, 408, 0, 0, 0, 0, -320, 408, 0, 0, 0, 0, -320, 336, 0, 0, 0, 0, -368, 336, 0, 0, 0, 0, -368, 208, 0, 0, 0, 0, -560, 208, 0, 0, 0, 0, -562.048, 78.6817, 0, 0, 0, 0, -432, 80, 0, 0, 0, 0, -138.048, 78.6817)
-}
-point_count = 11
 
 [sub_resource type="Curve2D" id="Curve2D_gl82f"]
 _data = {
@@ -197,77 +14,66 @@ _data = {
 }
 point_count = 8
 
+[sub_resource type="Curve2D" id="Curve2D_kn8rg"]
+_data = {
+"points": PackedVector2Array(0, 2.11893, 0, -2.11893, -192, 80, 0, 0, 0, 0, -192, 192, 0, 0, 0, 0, -192, 408, 0, 0, 0, 0, -320, 408, 0, 0, 0, 0, -320, 336, 0, 0, 0, 0, -368, 336, 0, 0, 0, 0, -368, 208, 0, 0, 0, 0, -560, 208, 0, 0, 0, 0, -562.048, 78.6817, 0, 0, 0, 0, -432, 80, 0, 0, 0, 0, -138.048, 78.6817)
+}
+point_count = 11
+
 [node name="level" type="Node2D"]
 process_mode = 1
 texture_filter = 2
 script = ExtResource("1_bdi2s")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="Static" type="CanvasGroup" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Static"]
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-456, -360, 1272, -360, 1272, 832, -464, 832)
 
-[node name="FloorTileMap" type="TileMapLayer" parent="."]
-position = Vector2(-64, -16)
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAAAP//AgACAAAAAAABAP//AgACAAAAAAACAP//AgACAAAAAAADAP//AgACAAAAAAAEAP//AgACAAAAAAAFAP//AgACAAAAAAAGAP//AgACAAAAAAAHAP//AgACAAAAAAAIAP//AgACAAAAAAD/////AgAFAAAAAAD//wAAAgAFAAAAAAD//wEAAgAFAAAAAAD//wIAAgAFAAAAAAD//wMAAgAFAAAAAAD//wQAAgAFAAAAAAAJAP//AgACAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAD//wUAAgAFAAAAAAAJAAUAAAAAAAAAAAD+//7/AgABAAAAAAD///7/AgABAAAAAAAAAP7/AgABAAAAAAABAP7/AgABAAAAAAACAP7/AgABAAAAAAADAP7/AgABAAAAAAAEAP7/AgABAAAAAAAFAP7/AgABAAAAAAAGAP7/AgABAAAAAAAHAP7/AgABAAAAAAAIAP7/AgABAAAAAAAJAP7/AgABAAAAAAAKAP7/AgABAAAAAAD+////AgABAAAAAAD+/wAAAgABAAAAAAD+/wEAAgABAAAAAAD+/wIAAgABAAAAAAD+/wMAAgABAAAAAAD+/wQAAgABAAAAAAD+/wUAAgABAAAAAAAKAP//AgACAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAgADAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAP//AgACAAAAAAAMAP//AgAEAAAAAAAMAAAAAgAEAAAAAAAMAAEAAgAEAAAAAAAMAAIAAgAEAAAAAAAMAAMAAgAEAAAAAAAMAAQAAgAEAAAAAAAMAAUAAgAEAAAAAAALAAUAAAAAAAAAAAALAAYAAgADAAAAAAANAAUAAgABAAAAAAANAAYAAgABAAAAAAAMAAYAAgABAAAAAAANAAQAAgABAAAAAAANAAMAAgABAAAAAAANAAIAAgABAAAAAAANAAEAAgABAAAAAAANAAAAAgABAAAAAAANAP//AgABAAAAAAANAP7/AgABAAAAAAAMAP7/AgABAAAAAAALAP7/AgABAAAAAAAJAAYAAgADAAAAAAAIAAYAAgADAAAAAAAHAAYAAgADAAAAAAAGAAYAAgADAAAAAAAFAAYAAgADAAAAAAAEAAYAAgADAAAAAAADAAYAAgADAAAAAAACAAYAAgADAAAAAAABAAYAAgADAAAAAAAAAAYAAgADAAAAAAD//wYAAgABAAAAAAD+/wYAAgABAAAAAAA=")
-tile_set = SubResource("TileSet_en2f5")
-rendering_quadrant_size = 32
+[node name="FloorTileMap" parent="Static" instance=ExtResource("2_muwnv")]
 
-[node name="ObjectsTileMap" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAADAAEAAAAAAAAAAAAEAAEAAAABAAAAAAACAAEAAAABAAAAAAAEAAMAAAAAAAAAAAADAAMAAAABAAAAAAABAAMAAAAAAAAAAAAAAAMAAAABAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAGAAEAAAABAAAAAAAHAAEAAAABAAAAAAAJAAEAAAAAAAAAAAAKAAEAAAABAAAAAAAKAAMAAAABAAAAAAAJAAMAAAABAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAABAAAAAAA=")
-tile_set = SubResource("TileSet_5f8mo")
+[node name="ObjectsTileMap" parent="Static" instance=ExtResource("3_2uxfd")]
 
-[node name="Ghost" parent="." instance=ExtResource("5_r6wb6")]
-position = Vector2(616, 160)
+[node name="Dynamic" type="CanvasGroup" parent="."]
+y_sort_enabled = true
 
-[node name="Camera" type="Camera2D" parent="Ghost"]
-unique_name_in_owner = true
-position = Vector2(72, 0)
-zoom = Vector2(2, 2)
-limit_left = -200
-limit_top = -100
-limit_right = 750
-limit_bottom = 500
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Ghost/Camera"]
-libraries = {
-"": SubResource("AnimationLibrary_6c7jf")
-}
-
-[node name="Armor" parent="." groups=["Possessable"] instance=ExtResource("6_e81wv")]
-position = Vector2(488, 288)
-
-[node name="Armor3" parent="." groups=["Possessable"] instance=ExtResource("6_e81wv")]
-position = Vector2(-32, 232)
-
-[node name="Armor4" parent="." groups=["Possessable"] instance=ExtResource("6_e81wv")]
+[node name="Armor4" parent="Dynamic" groups=["Possessable"] instance=ExtResource("6_e81wv")]
 position = Vector2(96, 312)
 
-[node name="ChaserPath1" type="Path2D" parent="."]
-position = Vector2(536, -56)
-curve = SubResource("Curve2D_kn8rg")
+[node name="Armor3" parent="Dynamic" groups=["Possessable"] instance=ExtResource("6_e81wv")]
+position = Vector2(-32, 232)
 
-[node name="PathFollow2D" type="PathFollow2D" parent="ChaserPath1"]
-position = Vector2(-192, 80)
-rotation = -1.5708
-rotates = false
+[node name="Armor" parent="Dynamic" groups=["Possessable"] instance=ExtResource("6_e81wv")]
+position = Vector2(488, 288)
 
-[node name="Chaser" parent="ChaserPath1/PathFollow2D" groups=["Chaser"] instance=ExtResource("7_23jwy")]
-rotation = 1.5708
-
-[node name="ChaserPath2" type="Path2D" parent="."]
+[node name="ChaserPath2" type="Path2D" parent="Dynamic"]
 position = Vector2(576, -56)
 curve = SubResource("Curve2D_gl82f")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="ChaserPath2"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Dynamic/ChaserPath2"]
 position = Vector2(96, 88)
 rotation = -1.5708
 rotates = false
 
-[node name="Chaser" parent="ChaserPath2/PathFollow2D" groups=["Chaser"] instance=ExtResource("7_23jwy")]
+[node name="Chaser" parent="Dynamic/ChaserPath2/PathFollow2D" groups=["Chaser"] instance=ExtResource("7_23jwy")]
 position = Vector2(16, 8.00006)
 rotation = 1.5708
+
+[node name="ChaserPath1" type="Path2D" parent="Dynamic"]
+position = Vector2(536, -56)
+curve = SubResource("Curve2D_kn8rg")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Dynamic/ChaserPath1"]
+position = Vector2(-192, 80)
+rotation = -1.5708
+rotates = false
+
+[node name="Chaser" parent="Dynamic/ChaserPath1/PathFollow2D" groups=["Chaser"] instance=ExtResource("7_23jwy")]
+rotation = 1.5708
+
+[node name="Ghost" parent="Dynamic" instance=ExtResource("5_r6wb6")]
+position = Vector2(616, 160)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0.439298, 0.334059, 0.198265, 1)

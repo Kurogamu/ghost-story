@@ -1,7 +1,7 @@
 extends Node
 
-@export var fade_in_speed = 1.0
-@export var fade_out_speed = 5.0
+@export var fade_in_speed = 5.0
+@export var fade_out_speed = 15.0
 
 var _fade_in_tracks = {}
 var _fade_out_tracks = {}
@@ -18,12 +18,12 @@ func _process(delta: float) -> void:
 	for track_name in _fade_in_tracks:
 		var track = get_node(track_name)
 		var next_volume = track.get_volume_db() + fade_in_speed * delta
-		track.set_volume_db(max(0, next_volume))
+		track.set_volume_db(min(0, next_volume))
 
 	for track_name in _fade_out_tracks:
 		var track = get_node(track_name)
 		var next_volume = track.get_volume_db() - fade_out_speed * delta
-		track.set_volume_db(min(MIN_VOLUME, next_volume))
+		track.set_volume_db(max(MIN_VOLUME, next_volume))
 
 
 func fade_in_track(track_name: String) -> void:

@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=4 uid="uid://dv887amsfkn00"]
+
+[ext_resource type="Texture2D" uid="uid://cno7pet1j0lc8" path="res://sprites/bookshelf.png" id="1_8xkgb"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_k6tgr"]
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vhvaw"]
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cc436"]
+texture = ExtResource("1_8xkgb")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_k6tgr")
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -16.5, 32, -16.5, 32, 32, -32, 32)
+1:0/0 = 0
+1:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_vhvaw")
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -16.5, 32, -16.5, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_5f8mo"]
+tile_size = Vector2i(64, 64)
+occlusion_layer_0/light_mask = 1
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_cc436")
+
+[node name="ObjectsTileMap" type="TileMapLayer"]
+tile_map_data = PackedByteArray("AAADAAEAAAAAAAAAAAAEAAEAAAABAAAAAAACAAEAAAABAAAAAAAEAAMAAAAAAAAAAAADAAMAAAABAAAAAAABAAMAAAAAAAAAAAAAAAMAAAABAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAGAAEAAAABAAAAAAAHAAEAAAABAAAAAAAJAAEAAAAAAAAAAAAKAAEAAAABAAAAAAAKAAMAAAABAAAAAAAJAAMAAAABAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_5f8mo")

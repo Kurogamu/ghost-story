@@ -8,10 +8,12 @@ var state: States = States.DEFAULT
 @export var possessed_zoom =  Vector2(1.5, 1.5)
 
 
+var _interaction_target_stack: Array[Node] = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for node in self.get_tree().get_nodes_in_group("Possessable"):
-		node.possessable_enter.connect(_on_possessable)
+		node.possessable_enter.connect(_on_possessable_enter)
 		node.possessable_exit.connect(_on_interactable_exit)
 		node.get_node("SoundWave").heard.connect(_on_heard)
 
@@ -21,7 +23,7 @@ func _ready() -> void:
 		node.light_enter.connect(_on_chaser_light_enter)
 		node.get_node("SoundWave").heard.connect(_on_heard)
 
-		%Camera/AnimationPlayer.play("camera_zoom_out")
+		$Dynamic/Ghost/Camera/AnimationPlayer.play("camera_zoom_out")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,26 +31,25 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_possessable(target):
-	interaction_target = target
+func _on_possessable_enter(target):
+	_interaction_target_stack.append(target)
 	$Music.fade_in_track("Drums")
 
 
 func _on_chaser_enter(chaser):
-	if not $Ghost.get_hidden():
-		interaction_target = chaser
-		$Music.fade_in_track("Drums")
+	_interaction_target_stack.append(chaser)
+	$Music.fade_in_track("Drums")
 
 
 func _on_chaser_light_enter(chaser):
-	if not $Ghost.get_hidden():
-		$Ghost.scare()
+	if not $Dynamic/Ghost.get_hidden():
+		$Dynamic/Ghost.scare()
 		chaser.scare()
 
 
 func _on_interactable_exit(node):
-	if interaction_target == node:
-		interaction_target = null
+	if node in _interaction_target_stack:
+		_interaction_target_stack.erase(node)
 		$Music.fade_out_track("Drums")
 
 
@@ -64,30 +65,34 @@ func _input(event):
 
 
 func _handle_interact():
-	if interaction_target == null or not interaction_target.is_interactable():
+	var _interactable_filter = func (node): return node.is_interactable()
+	var interaction_targets = _interaction_target_stack.filter(_interactable_filter)
+	if interaction_targets.is_empty():
 		return
+	var interaction_target = interaction_targets.back()
 
 	if interaction_target.is_in_group("Possessable"):
 		if state != States.POSSESSING:
 			interaction_target.set_possessed(true)
-			$Ghost.global_position = interaction_target.global_position
+			$Dynamic/Ghost.global_position = interaction_target.global_position
 			_set_state(States.POSSESSING)
 		else:
 			interaction_target.set_possessed(false)
 			_set_state(States.DEFAULT)
 
-	if interaction_target.is_in_group("Chaser"):
+	elif interaction_target.is_in_group("Chaser"):
 		interaction_target.flee()
+		_interaction_target_stack.erase(interaction_target)
 		$Music.fade_in_track("Bass")
-		$Ghost.spook()
+		$Dynamic/Ghost.spook()
 
 
 func _set_state(next_state: States) -> void:
 	match next_state:
 		States.DEFAULT:
-			%Camera/AnimationPlayer.play("camera_zoom_out")
-			$Ghost.set_possessing(false)
+			$Dynamic/Ghost/Camera/AnimationPlayer.play("camera_zoom_out")
+			$Dynamic/Ghost.set_possessing(false)
 		States.POSSESSING:
-			%Camera/AnimationPlayer.play("camera_zoom_in")
-			$Ghost.set_possessing(true)
+			$Dynamic/Ghost/Camera/AnimationPlayer.play("camera_zoom_in")
+			$Dynamic/Ghost.set_possessing(true)
 	state = next_state
