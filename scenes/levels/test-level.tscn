@@ -38,13 +38,13 @@ polygon = PackedVector2Array(-456, -360, 1272, -360, 1272, 832, -464, 832)
 [node name="Dynamic" type="CanvasGroup" parent="."]
 y_sort_enabled = true
 
-[node name="Armor4" parent="Dynamic" groups=["Possessable"] instance=ExtResource("6_e81wv")]
+[node name="Armor4" parent="Dynamic" instance=ExtResource("6_e81wv")]
 position = Vector2(96, 312)
 
-[node name="Armor3" parent="Dynamic" groups=["Possessable"] instance=ExtResource("6_e81wv")]
+[node name="Armor3" parent="Dynamic" instance=ExtResource("6_e81wv")]
 position = Vector2(-32, 232)
 
-[node name="Armor" parent="Dynamic" groups=["Possessable"] instance=ExtResource("6_e81wv")]
+[node name="Armor" parent="Dynamic" instance=ExtResource("6_e81wv")]
 position = Vector2(488, 288)
 
 [node name="ChaserPath2" type="Path2D" parent="Dynamic"]
@@ -72,7 +72,8 @@ rotates = false
 [node name="Chaser" parent="Dynamic/ChaserPath1/PathFollow2D" groups=["Chaser"] instance=ExtResource("7_23jwy")]
 rotation = 1.5708
 
-[node name="Ghost" parent="Dynamic" instance=ExtResource("5_r6wb6")]
+[node name="PlayerGhost" parent="Dynamic" instance=ExtResource("5_r6wb6")]
+unique_name_in_owner = true
 position = Vector2(616, 160)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]

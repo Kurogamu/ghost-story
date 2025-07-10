@@ -174,7 +174,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.533333),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Vector2(2, 2), Vector2(3, 3)]
+"values": [Vector2(2, 2), Vector2(2.5, 2.5)]
 }
 
 [sub_resource type="Animation" id="Animation_hpe1v"]
@@ -189,7 +189,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Vector2(3, 3), Vector2(2, 2)]
+"values": [Vector2(2.5, 2.5), Vector2(2, 2)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6c7jf"]
@@ -232,8 +232,6 @@ position = Vector2(72, 0)
 zoom = Vector2(2, 2)
 limit_left = -200
 limit_top = -100
-limit_right = 750
-limit_bottom = 500
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 

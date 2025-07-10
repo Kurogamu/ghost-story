@@ -12,7 +12,7 @@ radius = 11.65
 [sub_resource type="CircleShape2D" id="CircleShape2D_0nkti"]
 radius = 83.0963
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[node name="Enemy" type="StaticBody2D" groups=["Enemy"]]
 script = ExtResource("1_1v0tl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

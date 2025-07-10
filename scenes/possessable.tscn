@@ -41,7 +41,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4xn6a"]
 
-[node name="Possessable" type="StaticBody2D"]
+[node name="Possessable" type="StaticBody2D" groups=["Possessable"]]
 script = ExtResource("1_gaeoc")
 
 [node name="SoundWave" parent="." instance=ExtResource("2_t4fng")]

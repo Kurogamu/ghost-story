@@ -9,6 +9,7 @@ var _state = States.RUNNING
 func _ready() -> void:
 	# Input.action_press("pause")
 	%PauseMenu.connect("resume", _on_resume)
+	$level.set_process_mode(PROCESS_MODE_PAUSABLE)
 	_set_state(States.PAUSED)
 
 

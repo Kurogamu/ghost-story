@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2mvbmmodbowy"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ldtbl"]
-[ext_resource type="PackedScene" uid="uid://p7ksqskkxnjd" path="res://scenes/levels/test-level.tscn" id="2_7d4rq"]
+[ext_resource type="PackedScene" uid="uid://gdbqqma0dbf3" path="res://scenes/levels/library_level.tscn" id="3_6if4s"]
 [ext_resource type="PackedScene" uid="uid://cl0sfhg1bpt8q" path="res://scenes/pause.tscn" id="9_6cchn"]
 
 [node name="game" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_ldtbl")
 
-[node name="level" parent="." instance=ExtResource("2_7d4rq")]
+[node name="level" parent="." instance=ExtResource("3_6if4s")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_6cchn")]
 unique_name_in_owner = true

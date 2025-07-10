@@ -7,7 +7,9 @@ signal light_enter
 enum States {DEFAULT, SCARED, FLEEING, SPOOKED}
 var state: States = States.DEFAULT
 
-var scare_level: int = 0
+var _turn_speed: float = 10.0
+
+var _scare_level: int = 0
 @export var scare_threshold: int = 3
 
 @onready var _follow :PathFollow2D = get_parent()
@@ -40,7 +42,11 @@ func _process(delta: float) -> void:
 	if _follow:
 		_follow.set_progress(_follow.get_progress() + speed * delta)
 		var angle = _prev_position.angle_to_point(self.global_position)
-		$Flashlight.set_rotation(angle)
+
+		var flashlight_rotation = lerp_angle(
+			$Flashlight.get_rotation(), angle, _turn_speed * delta)
+		$Flashlight.set_rotation(flashlight_rotation)
+
 		$CharSprite.flip_h = abs(angle) > PI * 0.51
 		_prev_position = self.global_position
 
@@ -86,7 +92,7 @@ func is_interactable():
 
 func scare():
 	if state in [States.DEFAULT, States.SCARED]:
-		scare_level += 1
+		_scare_level += 1
 		_set_state(States.SPOOKED)
 
 
@@ -98,7 +104,7 @@ func _on_end_animation():
 	$ReactionSprite.visible = false
 	match state:
 		States.SPOOKED:
-			if scare_level >= scare_threshold:
+			if _scare_level >= scare_threshold:
 				_set_state(States.SCARED)
 			else:
 				_set_state(States.DEFAULT)

@@ -4,6 +4,9 @@ extends CharacterBody2D
 @export var acceleration: float = 1500.0
 @export var deceleration: float = 1000.0
 @export var start_pos: Vector2 = Vector2(0, 0)
+@export var camera_limits: Dictionary = {
+	"top": 0, "right": 1000, "bottom": 1000, "left": 0
+}
 const IS_MAIN = true
 
 enum States {IDLE, INVISIBLE, MOVING, POSSESSING, SCARED, SPOOKING}
@@ -15,6 +18,13 @@ func _ready():
 	$CharSprite.animation_finished.connect(_on_end_animation)
 	$InvisibilityTimeout.connect("timeout", _on_invisibility_end)
 	start_pos = self.position
+
+	$Camera.limit_top = camera_limits["top"]
+	$Camera.limit_right = camera_limits["right"]
+	$Camera.limit_bottom = camera_limits["bottom"]
+	$Camera.limit_left = camera_limits["left"]
+	$Camera/AnimationPlayer.play("camera_zoom_out")
+
 
 
 func _physics_process(delta: float) -> void:
@@ -54,9 +64,12 @@ func _set_state(next_state: States) -> void:
 	match next_state:
 		States.POSSESSING:
 			$CharSprite.visible = false
+			$Camera/AnimationPlayer.play("camera_zoom_in")
 		States.IDLE:
 			$CharSprite.play("idle")
 			$CharSprite.visible = true
+			if state == States.POSSESSING:
+				$Camera/AnimationPlayer.play("camera_zoom_out")
 		States.SCARED:
 			$CharSprite.play("scared")
 			$ReactionSprite.visible = true

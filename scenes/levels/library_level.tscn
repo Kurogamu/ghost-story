@@ -1,16 +1,163 @@
-[gd_scene load_steps=4 format=3 uid="uid://gdbqqma0dbf3"]
+[gd_scene load_steps=13 format=4 uid="uid://gdbqqma0dbf3"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_fk7g4"]
 [ext_resource type="PackedScene" uid="uid://dvol352c2xf32" path="res://scenes/floor_tile_map.tscn" id="2_noner"]
 [ext_resource type="PackedScene" uid="uid://dv887amsfkn00" path="res://scenes/objects_tile_map.tscn" id="3_o2b0v"]
+[ext_resource type="PackedScene" uid="uid://dhmflhqqfmp7q" path="res://scenes/possessable.tscn" id="4_j1ulk"]
+[ext_resource type="PackedScene" uid="uid://bw7yupyo8ie8d" path="res://scenes/ghost_character.tscn" id="5_l4glu"]
+[ext_resource type="PackedScene" uid="uid://c2scwb5eqenc7" path="res://scenes/music.tscn" id="6_6bdmt"]
+[ext_resource type="PackedScene" uid="uid://bdmn25a6icjej" path="res://scenes/chaser.tscn" id="6_cf3hl"]
+
+[sub_resource type="Curve2D" id="Curve2D_7o5wh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -16, 416, 0, 0, 0, 0, -16, 528, 0, 0, 0, 0, 544, 528, 0, 0, 0, 0, 544, 416, 0, 0, 0, 0, -16, 416)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_dm8d6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 240, 176, 0, 0, 0, 0, -48, 176, 0, 0, 0, 0, -48, 288, 0, 0, 0, 0, 240, 288, 0, 0, 0, 0, 240, 176)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_y6neq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 240, 32, 0, 0, 0, 0, 240, 160, 0, 0, 0, 0, -48, 160, 0, 0, 0, 0, -48, 32, 0, 0, 0, 0, 240, 32)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_la4a7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 272, 32, 0, 0, 0, 0, 272, 160, 0, 0, 0, 0, 560, 160, 0, 0, 0, 0, 560, 32, 0, 0, 0, 0, 272, 32)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_te1bg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 272, 176, 0, 0, 0, 0, 560, 176, 0, 0, 0, 0, 560, 288, 0, 0, 0, 0, 272, 288, 0, 0, 0, 0, 272, 176)
+}
+point_count = 5
 
 [node name="LibraryLevel" type="Node2D"]
 script = ExtResource("1_fk7g4")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="Static" type="CanvasGroup" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Static"]
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-456, -360, 1272, -360, 1272, 832, -464, 832)
 
-[node name="FloorTileMap" parent="." instance=ExtResource("2_noner")]
+[node name="FloorTileMap" parent="Static" instance=ExtResource("2_noner")]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAAAP//AgACAAAAAAABAP//AgACAAAAAAACAP//AgACAAAAAAADAP//AgACAAAAAAAEAP//AgACAAAAAAAFAP//AgACAAAAAAAGAP//AgACAAAAAAAHAP//AgACAAAAAAAIAP//AgACAAAAAAD/////AgAFAAAAAAD//wAAAgAFAAAAAAD//wEAAgAFAAAAAAD//wIAAgAFAAAAAAD//wMAAgAFAAAAAAD//wQAAgAFAAAAAAAJAP//AgACAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAAAAUAAgACAAAAAAABAAUAAgACAAAAAAACAAUAAgACAAAAAAADAAUAAgACAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAgACAAAAAAAHAAUAAgACAAAAAAAIAAUAAgACAAAAAAD//wUAAgAFAAAAAAAJAAUAAgACAAAAAAD+//7/AgABAAAAAAD///7/AgABAAAAAAAAAP7/AgABAAAAAAABAP7/AgABAAAAAAACAP7/AgABAAAAAAADAP7/AgABAAAAAAAEAP7/AgABAAAAAAAFAP7/AgABAAAAAAAGAP7/AgABAAAAAAAHAP7/AgABAAAAAAAIAP7/AgABAAAAAAAJAP7/AgABAAAAAAAKAP7/AgABAAAAAAD+////AgABAAAAAAD+/wAAAgABAAAAAAD+/wEAAgABAAAAAAD+/wIAAgABAAAAAAD+/wMAAgABAAAAAAD+/wQAAgABAAAAAAD+/wUAAgABAAAAAAAKAP//AgAEAAAAAAAKAAAAAgAEAAAAAAAKAAEAAgAEAAAAAAAKAAIAAgAEAAAAAAAKAAMAAgAEAAAAAAAKAAQAAgAEAAAAAAAKAAUAAgAEAAAAAAAKAAYAAgAEAAAAAAANAAYAAgABAAAAAAANAAQAAgABAAAAAAANAAMAAgABAAAAAAANAAIAAgABAAAAAAANAAEAAgABAAAAAAANAAAAAgABAAAAAAANAP//AgABAAAAAAANAP7/AgABAAAAAAAMAP7/AgABAAAAAAALAP7/AgABAAAAAAAJAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAADAAYAAAAAAAAAAAACAAYAAAAAAAAAAAABAAYAAAAAAAAAAAAAAAYAAAAAAAAAAAD//wYAAgAFAAAAAAD+/wYAAgABAAAAAAAAAAcAAAAAAAAAAAAFAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAADAAgAAAAAAAAAAAACAAgAAAAAAAAAAAABAAgAAAAAAAAAAAAAAAgAAAAAAAAAAAD//wcAAgAFAAAAAAD//wgAAgAFAAAAAAAAAAkAAgADAAAAAAABAAkAAgADAAAAAAACAAkAAgADAAAAAAADAAkAAgADAAAAAAAEAAkAAgADAAAAAAAFAAkAAgADAAAAAAAGAAgAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAHAAgAAAAAAAAAAAAGAAkAAgADAAAAAAAHAAkAAgADAAAAAAAIAAkAAgADAAAAAAAJAAkAAgADAAAAAAAKAAgAAgAEAAAAAAAKAAcAAgAEAAAAAAABAAcAAAAAAAAAAAACAAcAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAA=")
 
-[node name="ObjectsTileMap" parent="." instance=ExtResource("3_o2b0v")]
+[node name="ObjectsTileMap" parent="Static" instance=ExtResource("3_o2b0v")]
+tile_map_data = PackedByteArray("AAACAAEAAAABAAAAAAABAAMAAAAAAAAAAAAAAAMAAAABAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAACAAMAAAABAAAAAAAFAAMAAAAAAAAAAAAFAAEAAAAAAAAAAAABAAcAAAABAAAAAAACAAcAAAABAAAAAAAEAAcAAAABAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAABAAAAAAADAAcAAAAAAAAAAAA=")
+
+[node name="Dynamic" type="CanvasGroup" parent="."]
+y_sort_enabled = true
+
+[node name="PlayerGhost" parent="Dynamic" instance=ExtResource("5_l4glu")]
+unique_name_in_owner = true
+position = Vector2(-40, 384)
+camera_limits = {
+"bottom": 650,
+"left": -100,
+"right": 610,
+"top": -100
+}
+
+[node name="Path2D" type="Path2D" parent="Dynamic"]
+curve = SubResource("Curve2D_7o5wh")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Dynamic/Path2D"]
+position = Vector2(531.476, 528)
+progress = 659.405
+rotates = false
+
+[node name="Enemy" parent="Dynamic/Path2D/PathFollow2D" instance=ExtResource("6_cf3hl")]
+
+[node name="Path2D2" type="Path2D" parent="Dynamic"]
+curve = SubResource("Curve2D_dm8d6")
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Dynamic/Path2D2"]
+position = Vector2(-48, 227.04)
+progress = 339.04
+rotates = false
+
+[node name="Enemy" parent="Dynamic/Path2D2/PathFollow2D2" instance=ExtResource("6_cf3hl")]
+
+[node name="Path2D3" type="Path2D" parent="Dynamic"]
+curve = SubResource("Curve2D_y6neq")
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Dynamic/Path2D3"]
+position = Vector2(36.9468, 160)
+progress = 331.053
+rotates = false
+
+[node name="Enemy" parent="Dynamic/Path2D3/PathFollow2D3" instance=ExtResource("6_cf3hl")]
+
+[node name="Path2D4" type="Path2D" parent="Dynamic"]
+curve = SubResource("Curve2D_la4a7")
+
+[node name="PathFollow2D4" type="PathFollow2D" parent="Dynamic/Path2D4"]
+position = Vector2(272, 144.844)
+progress = 112.819
+rotates = false
+
+[node name="Enemy" parent="Dynamic/Path2D4/PathFollow2D4" instance=ExtResource("6_cf3hl")]
+
+[node name="Path2D5" type="Path2D" parent="Dynamic"]
+curve = SubResource("Curve2D_te1bg")
+
+[node name="PathFollow2D5" type="PathFollow2D" parent="Dynamic/Path2D5"]
+position = Vector2(415.68, 176)
+progress = 143.68
+rotates = false
+
+[node name="Enemy" parent="Dynamic/Path2D5/PathFollow2D5" instance=ExtResource("6_cf3hl")]
+
+[node name="Possessable" parent="Dynamic" instance=ExtResource("4_j1ulk")]
+position = Vector2(208, 96)
+scale = Vector2(0.75, 0.75)
+
+[node name="Possessable9" parent="Dynamic" instance=ExtResource("4_j1ulk")]
+position = Vector2(208, 336)
+scale = Vector2(0.75, 0.75)
+
+[node name="Possessable11" parent="Dynamic" instance=ExtResource("4_j1ulk")]
+position = Vector2(48, 480)
+scale = Vector2(0.75, 0.75)
+
+[node name="Possessable12" parent="Dynamic" instance=ExtResource("4_j1ulk")]
+position = Vector2(464, 480)
+scale = Vector2(0.75, 0.75)
+
+[node name="Possessable10" parent="Dynamic" instance=ExtResource("4_j1ulk")]
+position = Vector2(304, 336)
+scale = Vector2(0.75, 0.75)
+
+[node name="Possessable8" parent="Dynamic" instance=ExtResource("4_j1ulk")]
+position = Vector2(528, 224)
+scale = Vector2(0.75, 0.75)
+
+[node name="Possessable6" parent="Dynamic" instance=ExtResource("4_j1ulk")]
+position = Vector2(304, 96)
+scale = Vector2(0.75, 0.75)
+
+[node name="Possessable7" parent="Dynamic" instance=ExtResource("4_j1ulk")]
+position = Vector2(528, 96)
+scale = Vector2(0.75, 0.75)
+
+[node name="Possessable3" parent="Dynamic" instance=ExtResource("4_j1ulk")]
+position = Vector2(-16, 96)
+scale = Vector2(0.75, 0.75)
+
+[node name="Possessable4" parent="Dynamic" instance=ExtResource("4_j1ulk")]
+position = Vector2(-16, 224)
+scale = Vector2(0.75, 0.75)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.439298, 0.334059, 0.198265, 1)
+blend_mode = 1
+
+[node name="Music" parent="." instance=ExtResource("6_6bdmt")]
