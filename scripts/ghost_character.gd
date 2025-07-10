@@ -9,8 +9,8 @@ extends CharacterBody2D
 }
 const IS_MAIN = true
 
-enum States {IDLE, INVISIBLE, MOVING, POSSESSING, SCARED, SPOOKING}
-var state: States = States.IDLE
+enum States {NORMAL, INVISIBLE, MOVING, POSSESSING, SCARED, SPOOKING}
+var state: States = States.NORMAL
 var last_velocity = Vector2(0,0)
 
 func _ready():
@@ -26,10 +26,9 @@ func _ready():
 	$Camera/AnimationPlayer.play("camera_zoom_out")
 
 
-
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
-	if state in [States.IDLE, States.MOVING, States.INVISIBLE]:
+	if state in [States.NORMAL, States.MOVING, States.INVISIBLE]:
 		var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 		var some_x = abs(direction.x) > 0.1
@@ -65,7 +64,7 @@ func _set_state(next_state: States) -> void:
 		States.POSSESSING:
 			$CharSprite.visible = false
 			$Camera/AnimationPlayer.play("camera_zoom_in")
-		States.IDLE:
+		States.NORMAL:
 			$CharSprite.play("idle")
 			$CharSprite.visible = true
 			if state == States.POSSESSING:
@@ -79,7 +78,7 @@ func _set_state(next_state: States) -> void:
 			$ReactionSprite.visible = true
 			$ReactionSprite.play("boo")
 		States.INVISIBLE:
-			$CharSprite.visible = true # Ironic right?
+			$CharSprite.visible = true # heh
 			$CharSprite.play("idle")
 			self.set_modulate(Color(1.0, 1.0, 1.0, 0.2))
 			$InvisibilityTimeout.start()
@@ -99,12 +98,12 @@ func get_possessing() -> bool:
 
 
 func scare() -> void:
-	if state not in [States.SCARED, States.INVISIBLE]:
+	if state not in [States.SCARED, States.INVISIBLE, States.POSSESSING]:
 		_set_state(States.SCARED)
 
 
 func spook() -> void:
-	if state in [States.IDLE, States.MOVING]:
+	if state in [States.NORMAL, States.MOVING]:
 		_set_state(States.SPOOKING)
 
 
@@ -118,9 +117,10 @@ func _on_end_animation():
 			$ReactionSprite.visible = false
 			_set_state(States.INVISIBLE)
 		States.SPOOKING:
-			_set_state(States.IDLE)
+			_set_state(States.NORMAL)
 
 
 func _on_invisibility_end():
 	self.set_modulate(Color(1.0, 1.0, 1.0, 1.0))
-	_set_state(States.IDLE)
+	if state == States.INVISIBLE:
+		_set_state(States.NORMAL)
