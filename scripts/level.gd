@@ -85,7 +85,6 @@ func _handle_interact():
 			$Music.fade_in_track("Drums")
 
 
-
 func _set_state(next_state: States) -> void:
 	match next_state:
 		States.DEFAULT:

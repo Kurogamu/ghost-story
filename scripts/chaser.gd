@@ -76,7 +76,6 @@ func _set_state(next_state: States) -> void:
 		States.DEFAULT: $CharSprite.play("default")
 		States.SCARED: $CharSprite.play("scared")
 		States.SPOOKED:
-			$SoundWave.run()
 			$CharSprite.play("spooked")
 			$ReactionSprite.visible = true
 			$ReactionSprite.play("spooked")
